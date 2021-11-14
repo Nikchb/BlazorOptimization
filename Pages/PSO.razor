@@ -1,0 +1,51 @@
+﻿@page "/"
+@using org.mariuszgromada.math.mxparser;
+
+<h3>Particle Swarm Optimization</h3>
+
+<div class="col-lg-6">
+    <div class="mb-3">
+        <label>Function</label>
+        <input class="form-control" @bind=Function placeholder="F(x1,x2) = (x1 - 10)^2 + (x2 + 5)^2" />
+    </div>   
+    <div class="mb-3">
+        <label>Iterations</label>
+        <input class="form-control" @bind=Iterations />
+    </div>
+    <div class="mb-3">
+        <label>Particles</label>
+        <input class="form-control" @bind=Particles />
+    </div>
+    <div class="mb-3">
+        <label>Particles</label>
+        <select @bind=Objective>
+            <option selected value="min">Min</option>
+            <option value="max">Max</option>
+            <option value="value">Objective value</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <table>
+
+        </table>
+    </div>
+    <div class="mb-3">
+        <button @onclick=Optimize>Optimize</button>
+    </div>
+    @if(SolutionVector!=null)
+    {
+        <div class="mb-3">
+            <label>F(x) = @(string.Format("{0:F4}", SolutionValue))</label>     
+            <br />            
+            @for(int i=0; i<SolutionVector.Length; i++)
+            {    
+                <br />
+                <lable>x@(i + 1) = @(string.Format("{0:F4}", SolutionVector[i]))</lable>
+            } 
+            <br />
+            <br />
+            <lable>Computation time: @ComputationTime.ToString()</lable>
+        </div>
+    }
+</div>
+
